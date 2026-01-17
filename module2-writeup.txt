@@ -1,0 +1,15 @@
+Write-up for:
+CPT 166 Module 2 Assignment: Add Foreign Keys to Demo Database
+Sylvia Schlotterbeck 9-21-25
+
+For this assignment, I checked each table for orphan rows in the column intended to be the Foreign Key
+before adding the Foreign Key to that table. I checked first for NULL values, and secondly for any 
+values less or greater than the range of the Primary Key column I planned to use as Foreign Key.
+
+I didn't find any orphan rows in any of the first 4 columns I checked (in tables: products, orders, and twice in order_details), but did find 6 orphan rows in the category_id column of testproducts table.
+I resolved this by creating a new row in the categories table -- "Unknown", which I them placed all of the testproducts rows whose category_ids fell outside the category_id range from categories. 
+
+I chose "ON DELETE RESTRICT" to prevent any deletions in child table Foreign Key values, and
+"ON UPDATE CASCADE" to ensure that any changes in parent table Primary Key values would cascade down to their child tables' corresponding Foreign Keys. Indexing Foreign Key columns for each of the tables in the database allowed me to set the "ON DELETE" and "ON UPDATE" constraints, which greatly strengthens the relational integrity of the whole database. 
+
+
